@@ -8,42 +8,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var historyTextView: UITextView!
     
-    @IBOutlet weak var incrementButton: UIButton!
-    @IBOutlet weak var decrementButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
+    
+    // MARK: - Outlets
+
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var historyTextView: UITextView!
+    
+    @IBOutlet private weak var incrementButton: UIButton!
+    @IBOutlet private weak var decrementButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
+    
+    // MARK: - Properties
     
     private var counter: Int = 0
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func incrementCounter(_ sender: Any) {
-        counter+=1
-        updateCounterLabel()
-        appendHistory("значение изменено на +1")
-    }
-    
-    @IBAction func decrementCounter(_ sender: Any) {
-        if counter > 0 {
-            counter-=1
-            updateCounterLabel()
-            appendHistory("значение изменено на -1")
-        } else {
-            appendHistory("попытка уменьшить значение счётчика ниже 0")
-        }
-    }
-    
-    @IBAction func resetCounter(_ sender: Any) {
-        counter=0
-        updateCounterLabel()
-        appendHistory("значение сброшено")
-    }
-    
+    // MARK: - Private methods
     
     private func updateCounterLabel() {
         counterLabel.text = "Значение счётчика: \(counter)"
@@ -62,5 +48,30 @@ class ViewController: UIViewController {
         let bottom = NSMakeRange(historyTextView.text.count - 1, 1)
         historyTextView.scrollRangeToVisible(bottom)
     }
+    
+    // MARK: - Actions
+    
+    @IBAction private func incrementCounter(_ sender: Any) {
+        counter+=1
+        updateCounterLabel()
+        appendHistory("значение изменено на +1")
+    }
+    
+    @IBAction private func decrementCounter(_ sender: Any) {
+        if counter > 0 {
+            counter-=1
+            updateCounterLabel()
+            appendHistory("значение изменено на -1")
+        } else {
+            appendHistory("попытка уменьшить значение счётчика ниже 0")
+        }
+    }
+    
+    @IBAction private func resetCounter(_ sender: Any) {
+        counter=0
+        updateCounterLabel()
+        appendHistory("значение сброшено")
+    }
+    
 }
 
